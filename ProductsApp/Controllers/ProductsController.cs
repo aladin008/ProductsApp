@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Web.Http;
 
 namespace ProductsApp.Controllers
@@ -29,6 +30,19 @@ namespace ProductsApp.Controllers
                 return NotFound();
             }
             return Ok(product);
+        }
+        public HttpResponseMessage Put([FromBody] Product p)
+        {
+            try
+            {
+                
+                return Request.CreateResponse(HttpStatusCode.OK, p);
+                 
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
+            }
         }
     }
 }
